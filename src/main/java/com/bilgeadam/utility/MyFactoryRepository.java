@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
+import java.util.Optional;
 
 public class MyFactoryRepository <T> implements ICrud<T>{
 
@@ -49,7 +50,7 @@ public class MyFactoryRepository <T> implements ICrud<T>{
     }
 
     @Override
-    public T findById(Long id) {
+    public Optional<T> findById(Long id) {
         return null;
     }
 }

@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
 
 public class SinifRepository extends MyFactoryRepository<Sinif> {
     EntityManager entityManager = HibernateUtility.getSessionFactory().createEntityManager();
@@ -28,13 +29,13 @@ public class SinifRepository extends MyFactoryRepository<Sinif> {
     }
 
     @Override
-    public Sinif findById(Long id) {
+    public Optional<Sinif> findById(Long id) {
         CriteriaQuery<Sinif> criteria = criteriaBuilder.createQuery(Sinif.class);
         Root<Sinif> root = criteria.from(Sinif.class);
         criteria.select(root);
         criteria.where(criteriaBuilder.equal(root.get("id"),id));
         Sinif sinif = entityManager.createQuery(criteria).getSingleResult();
-        return sinif;
+        return Optional.ofNullable(sinif);
     }
 
 

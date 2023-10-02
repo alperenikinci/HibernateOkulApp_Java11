@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
 
 
 public class OgrenciRepository extends MyFactoryRepository<Ogrenci> {
@@ -33,12 +34,16 @@ public class OgrenciRepository extends MyFactoryRepository<Ogrenci> {
         List<Ogrenci> ogrenciList = entityManager.createQuery(criteria).getResultList();
         return ogrenciList;
     }
-    public Ogrenci findById(Long id) {
+
+    @Override
+    public Optional<Ogrenci> findById(Long id) {
         CriteriaQuery<Ogrenci> criteria = criteriaBuilder.createQuery(Ogrenci.class);
         Root<Ogrenci> root = criteria.from(Ogrenci.class);
         criteria.select(root);
         criteria.where(criteriaBuilder.equal(root.get("id"),id));
         Ogrenci ogrenci = entityManager.createQuery(criteria).getSingleResult();
-        return ogrenci;
+        return Optional.ofNullable(ogrenci);
     }
+
+
 }

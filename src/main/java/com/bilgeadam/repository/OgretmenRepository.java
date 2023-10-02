@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
 
 public class OgretmenRepository extends MyFactoryRepository<Ogretmen> {
 
@@ -31,13 +32,13 @@ public class OgretmenRepository extends MyFactoryRepository<Ogretmen> {
     }
 
     @Override
-    public Ogretmen findById(Long id) {
+    public Optional<Ogretmen> findById(Long id) {
         CriteriaQuery<Ogretmen> criteria = criteriaBuilder.createQuery(Ogretmen.class);
         Root<Ogretmen> root = criteria.from(Ogretmen.class);
         criteria.select(root);
         criteria.where(criteriaBuilder.equal(root.get("id"),id));
         Ogretmen ogretmen = entityManager.createQuery(criteria).getSingleResult();
-        return ogretmen;
+        return Optional.ofNullable(ogretmen);
     }
 
 

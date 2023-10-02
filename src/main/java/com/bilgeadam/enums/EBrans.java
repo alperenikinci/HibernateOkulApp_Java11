@@ -1,4 +1,4 @@
-package com.bilgeadam.repository.entity;
+package com.bilgeadam.enums;
 
 public enum EBrans {
 

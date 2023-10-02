@@ -1,5 +1,6 @@
 package com.bilgeadam;
 
+import com.bilgeadam.controller.OgrenciController;
 import com.bilgeadam.repository.entity.KisiselBilgiler;
 import com.bilgeadam.repository.entity.Ogrenci;
 import com.bilgeadam.repository.hql.OgrenciDao;
@@ -11,8 +12,8 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Session session = HibernateUtility.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
+//        Session session = HibernateUtility.getSessionFactory().openSession();
+//        Transaction transaction = session.beginTransaction();
 //        Ogretmen ogretmen = Ogretmen.builder()
 //                .kisiselBilgiler(KisiselBilgiler.builder()
 //                        .isim("Alperen")
@@ -69,16 +70,18 @@ public class Main {
 
         Ogrenci ogrenci = Ogrenci.builder()
                 .kisiselBilgiler(KisiselBilgiler.builder()
-                        .isim("Mehmet")
-                        .soyisim("Çetin")
-                        .tcKimlikNo("465789")
+                        .isim("Ali")
+                        .soyisim("Dogan")
+                        .tcKimlikNo("1234789")
                         .build())
-                .dogumTarihi(LocalDate.of(2000,5,13))
+                .dogumTarihi(LocalDate.of(1995,3,19))
                 .build();
+        OgrenciController ogrenciController = new OgrenciController();
+        ogrenciController.save(ogrenci);
 
-        session.save(ogrenci);
-        transaction.commit();
-        session.close();
+//        session.save(ogrenci);
+//        transaction.commit();
+//        session.close();
 
 
 

@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 /*
     findAll ve findById icin metotlar.
@@ -48,8 +49,8 @@ public class OgrenciDao implements ICrud<Ogrenci> {
     }
 
     @Override
-    public Ogrenci findById(Long id) {
-        return entityManager.find(Ogrenci.class,id);
+    public Optional<Ogrenci> findById(Long id) {
+        return Optional.ofNullable(entityManager.find(Ogrenci.class,id));
     }
 
 
