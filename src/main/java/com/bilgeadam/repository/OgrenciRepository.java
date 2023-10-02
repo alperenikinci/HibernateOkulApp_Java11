@@ -1,8 +1,14 @@
-package com.bilgeadam.repository.criteria;
+package com.bilgeadam.repository;
 
 import com.bilgeadam.repository.entity.Ogrenci;
 import com.bilgeadam.utility.HibernateUtility;
 import com.bilgeadam.utility.ICrud;
+import com.bilgeadam.utility.MyFactoryRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -10,15 +16,14 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-/*
-    findAll
-    findById
 
- */
-public class OgrenciCriteria implements ICrud<Ogrenci> {
-
+public class OgrenciRepository extends MyFactoryRepository<Ogrenci> {
     EntityManager entityManager = HibernateUtility.getSessionFactory().createEntityManager();
     CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+    public OgrenciRepository() {
+        super(new Ogrenci());
+    }
 
     @Override
     public List<Ogrenci> findAll() {
@@ -28,8 +33,6 @@ public class OgrenciCriteria implements ICrud<Ogrenci> {
         List<Ogrenci> ogrenciList = entityManager.createQuery(criteria).getResultList();
         return ogrenciList;
     }
-
-    @Override
     public Ogrenci findById(Long id) {
         CriteriaQuery<Ogrenci> criteria = criteriaBuilder.createQuery(Ogrenci.class);
         Root<Ogrenci> root = criteria.from(Ogrenci.class);

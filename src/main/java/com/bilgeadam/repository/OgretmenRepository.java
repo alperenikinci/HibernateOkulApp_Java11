@@ -1,4 +1,45 @@
 package com.bilgeadam.repository;
 
-public class OgretmenRepository {
+import com.bilgeadam.repository.entity.Ogretmen;
+import com.bilgeadam.utility.HibernateUtility;
+import com.bilgeadam.utility.ICrud;
+import com.bilgeadam.utility.MyFactoryRepository;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
+
+public class OgretmenRepository extends MyFactoryRepository<Ogretmen> {
+
+    public OgretmenRepository() {
+        super(new Ogretmen());
+    }
+    EntityManager entityManager = HibernateUtility.getSessionFactory().createEntityManager();
+    CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+    @Override
+    public List<Ogretmen> findAll() {
+        CriteriaQuery<Ogretmen> criteria = criteriaBuilder.createQuery(Ogretmen.class);
+        Root<Ogretmen> root = criteria.from(Ogretmen.class);
+        criteria.select(root);
+        List<Ogretmen> ogretmenList = entityManager.createQuery(criteria).getResultList();
+        return ogretmenList;
+    }
+
+    @Override
+    public Ogretmen findById(Long id) {
+        CriteriaQuery<Ogretmen> criteria = criteriaBuilder.createQuery(Ogretmen.class);
+        Root<Ogretmen> root = criteria.from(Ogretmen.class);
+        criteria.select(root);
+        criteria.where(criteriaBuilder.equal(root.get("id"),id));
+        Ogretmen ogretmen = entityManager.createQuery(criteria).getSingleResult();
+        return ogretmen;
+    }
+
+
+
 }

@@ -1,16 +1,18 @@
 package com.bilgeadam;
 
-import com.bilgeadam.repository.criteria.OgrenciCriteria;
-import com.bilgeadam.repository.criteria.OgretmenCriteria;
+import com.bilgeadam.repository.entity.KisiselBilgiler;
 import com.bilgeadam.repository.entity.Ogrenci;
-import com.bilgeadam.repository.entity.Ogretmen;
+import com.bilgeadam.repository.hql.OgrenciDao;
+import com.bilgeadam.utility.HibernateUtility;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.util.List;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-//        Session session = HibernateUtility.getSessionFactory().openSession();
-//        Transaction transaction = session.beginTransaction();
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
 //        Ogretmen ogretmen = Ogretmen.builder()
 //                .kisiselBilgiler(KisiselBilgiler.builder()
 //                        .isim("Alperen")
@@ -58,12 +60,32 @@ public class Main {
 //        System.out.println("######################################");
 //        ogrenciList.forEach(x -> System.out.println(x));
 
-        OgretmenCriteria ogretmenCriteria = new OgretmenCriteria();
-        Ogretmen ogretmen = ogretmenCriteria.findById(1L);
-        List<Ogretmen> ogretmenList = ogretmenCriteria.findAll();
-        System.out.println("Tekli ogretmen (findById : " + ogretmen);
-        System.out.println("######################################");
-        ogretmenList.forEach(x -> System.out.println(x));
+//        OgretmenCriteria ogretmenCriteria = new OgretmenCriteria();
+//        Ogretmen ogretmen = ogretmenCriteria.findById(1L);
+//        List<Ogretmen> ogretmenList = ogretmenCriteria.findAll();
+//        System.out.println("Tekli ogretmen (findById : " + ogretmen);
+//        System.out.println("######################################");
+//        ogretmenList.forEach(x -> System.out.println(x));
+
+        Ogrenci ogrenci = Ogrenci.builder()
+                .kisiselBilgiler(KisiselBilgiler.builder()
+                        .isim("Mehmet")
+                        .soyisim("Çetin")
+                        .tcKimlikNo("465789")
+                        .build())
+                .dogumTarihi(LocalDate.of(2000,5,13))
+                .build();
+
+        session.save(ogrenci);
+        transaction.commit();
+        session.close();
+
+
+
+//        OgrenciDao ogrenciDao = new OgrenciDao();
+//        List<Ogrenci> ogrenciList = ogrenciDao.findAll2();
+//        ogrenciList.stream().forEach(x-> System.out.println(x));
+//        System.out.println(ogrenciDao.findById2(1L));
 
     }
 }

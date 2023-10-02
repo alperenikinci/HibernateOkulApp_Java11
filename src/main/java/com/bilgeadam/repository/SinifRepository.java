@@ -1,9 +1,9 @@
-package com.bilgeadam.repository.criteria;
+package com.bilgeadam.repository;
 
-import com.bilgeadam.repository.entity.Ogrenci;
 import com.bilgeadam.repository.entity.Sinif;
 import com.bilgeadam.utility.HibernateUtility;
 import com.bilgeadam.utility.ICrud;
+import com.bilgeadam.utility.MyFactoryRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,10 +11,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class SinifCriteria implements ICrud<Sinif> {
+public class SinifRepository extends MyFactoryRepository<Sinif> {
     EntityManager entityManager = HibernateUtility.getSessionFactory().createEntityManager();
     CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
+    public SinifRepository(){
+        super(new Sinif());
+    }
     @Override
     public List<Sinif> findAll() {
         CriteriaQuery<Sinif> criteria = criteriaBuilder.createQuery(Sinif.class);
@@ -33,4 +36,6 @@ public class SinifCriteria implements ICrud<Sinif> {
         Sinif sinif = entityManager.createQuery(criteria).getSingleResult();
         return sinif;
     }
+
+
 }
