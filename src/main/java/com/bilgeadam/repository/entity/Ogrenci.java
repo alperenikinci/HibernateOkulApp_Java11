@@ -14,7 +14,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Table(name = "tbl_ogrenci")
 @Entity
+
+@NamedQueries({
+        @NamedQuery(name = "Ogrenci.findAllByName", query = "SELECT o.kisiselBilgiler.isim FROM Ogrenci o"),
+//        @NamedQuery(name = "Ogrenci.findAllBornAfter1995", query = "SELECT o FROM Ogrenci o WHERE o.dogumTarihi>'1995-01-01'"),
+        @NamedQuery(name = "Ogrenci.findAllBornAfter1995", query = "SELECT o FROM Ogrenci o WHERE o.dogumTarihi> :threshold")
+}
+
+)
 public class Ogrenci {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

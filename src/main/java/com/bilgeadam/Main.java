@@ -1,17 +1,6 @@
 package com.bilgeadam;
 
-import com.bilgeadam.controller.OgrenciController;
-import com.bilgeadam.repository.entity.KisiselBilgiler;
-import com.bilgeadam.repository.entity.Ogrenci;
-import com.bilgeadam.repository.entity.Ogretmen;
-import com.bilgeadam.repository.hql.OgrenciDao;
-import com.bilgeadam.utility.DataGenerator;
-import com.bilgeadam.utility.HibernateUtility;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import java.time.LocalDate;
-import java.util.List;
+import com.bilgeadam.sorgular.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -85,11 +74,29 @@ public class Main {
 //        session.save(ogrenci);
 //        transaction.commit();
 //        session.close();
-        DataGenerator dataGenerator = new DataGenerator();
-        dataGenerator.sinifOlustur(dataGenerator.ogrenciOlustur(),dataGenerator.ogretmenOlustur());
+//        DataGenerator dataGenerator = new DataGenerator();
+//        dataGenerator.sinifOlustur(dataGenerator.ogrenciOlustur(),dataGenerator.ogretmenOlustur());
+
+        CriteriaSorgulari criteriaSorgulari = new CriteriaSorgulari();
+//        criteriaSorgulari.findAllStudentsByName().forEach(System.out::println);
+        criteriaSorgulari.findAllBornAfter1995().forEach(System.out::println);
 
 
+        NamedQuerySorgulari namedQuerySorgulari = new NamedQuerySorgulari();
+//        namedQuerySorgulari.findAllStudentNames().forEach(System.out::println);
+//        namedQuerySorgulari.findAllBornAfter1995().forEach(System.out::println);
 
+        HqlSorgulari hqlSorgulari = new HqlSorgulari();
+//        hqlSorgulari.findAllStudentsByName().forEach(System.out::println);
+//        hqlSorgulari.findAllBornAfter1995().forEach(System.out::println);
+
+        JpqlSorgulari jpqlSorgulari = new JpqlSorgulari();
+//        jpqlSorgulari.findAllStudentsByName().forEach(System.out::println);
+//        jpqlSorgulari.findAllStudentsBornAfter1995().forEach(System.out::println);
+
+        NativeQuerySorgulari nativeQuerySorgulari = new NativeQuerySorgulari();
+//        nativeQuerySorgulari.findAllStudentsByName().forEach(System.out::println);
+//        nativeQuerySorgulari.findAllStudentsBornAfter1995().forEach(System.out::println);
 
 //        OgrenciDao ogrenciDao = new OgrenciDao();
 //        List<Ogrenci> ogrenciList = ogrenciDao.findAll2();
