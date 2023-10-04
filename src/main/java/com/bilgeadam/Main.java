@@ -3,12 +3,15 @@ package com.bilgeadam;
 import com.bilgeadam.controller.OgrenciController;
 import com.bilgeadam.repository.entity.KisiselBilgiler;
 import com.bilgeadam.repository.entity.Ogrenci;
+import com.bilgeadam.repository.entity.Ogretmen;
 import com.bilgeadam.repository.hql.OgrenciDao;
+import com.bilgeadam.utility.DataGenerator;
 import com.bilgeadam.utility.HibernateUtility;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -68,20 +71,23 @@ public class Main {
 //        System.out.println("######################################");
 //        ogretmenList.forEach(x -> System.out.println(x));
 
-        Ogrenci ogrenci = Ogrenci.builder()
-                .kisiselBilgiler(KisiselBilgiler.builder()
-                        .isim("Ali")
-                        .soyisim("Dogan")
-                        .tcKimlikNo("1234789")
-                        .build())
-                .dogumTarihi(LocalDate.of(1995,3,19))
-                .build();
-        OgrenciController ogrenciController = new OgrenciController();
-        ogrenciController.save(ogrenci);
+//        Ogrenci ogrenci = Ogrenci.builder()
+//                .kisiselBilgiler(KisiselBilgiler.builder()
+//                        .isim("Ali")
+//                        .soyisim("Dogan")
+//                        .tcKimlikNo("1234789")
+//                        .build())
+//                .dogumTarihi(LocalDate.of(1995,3,19))
+//                .build();
+//        OgrenciController ogrenciController = new OgrenciController();
+//        ogrenciController.save(ogrenci);
 
 //        session.save(ogrenci);
 //        transaction.commit();
 //        session.close();
+        DataGenerator dataGenerator = new DataGenerator();
+        dataGenerator.sinifOlustur(dataGenerator.ogrenciOlustur(),dataGenerator.ogretmenOlustur());
+
 
 
 

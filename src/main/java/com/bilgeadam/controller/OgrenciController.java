@@ -29,4 +29,27 @@ public class OgrenciController {
     public Optional<Ogrenci> findById(Long id){
         return ogrenciService.findById(id);
     }
+
+    public List<Ogrenci> saveAll(List<Ogrenci> ogrenciList){
+        return (List<Ogrenci>) ogrenciService.saveAll(ogrenciList);
+    }
+
+    public void delete(Ogrenci ogrenci){
+        ogrenciService.delete(ogrenci);
+    }
+
+    public void deleteById(Long id){
+        ogrenciService.deleteById(id);
+    }
+
+    public boolean existById(Long id){
+        return ogrenciService.existById(id);
+    }
+    public List<Ogrenci> findByEntity(Ogrenci ogrenci){
+        return ogrenciService.findByEntity(ogrenci);
+    }
+
+    public List<Ogrenci> findByColumnNameAndValue(String columnName, String columnValue){
+        return ogrenciService.findByColumnNameAndValue(columnName,columnValue);
+    }
 }

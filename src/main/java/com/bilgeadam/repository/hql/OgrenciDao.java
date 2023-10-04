@@ -14,7 +14,7 @@ import java.util.Optional;
 /*
     findAll ve findById icin metotlar.
  */
-public class OgrenciDao implements ICrud<Ogrenci> {
+public class OgrenciDao implements ICrud<Ogrenci,Long> {
     private final EntityManager entityManager;
 
     public OgrenciDao() {
@@ -32,11 +32,36 @@ public class OgrenciDao implements ICrud<Ogrenci> {
     }
 
     @Override
+    public Iterable saveAll(Iterable<Ogrenci> entites) {
+        return null;
+    }
+
+    @Override
+    public void delete(Ogrenci entity) {
+
+    }
+
+    @Override
+    public void deleteById(Long aLong) {
+
+    }
+
+    @Override
+    public boolean existById(Long aLong) {
+        return false;
+    }
+
+    @Override
     public List<Ogrenci> findAll() {
         //"SELECT * FROM tbl_ogrenci"
         String hql = "SELECT o FROM Ogrenci as o";
         TypedQuery<Ogrenci> query = entityManager.createQuery(hql, Ogrenci.class);
         return query.getResultList();
+    }
+
+    @Override
+    public List<Ogrenci> findByEntity(Ogrenci entity) {
+        return null;
     }
 
     public List<Ogrenci> findAll2(){
@@ -51,6 +76,11 @@ public class OgrenciDao implements ICrud<Ogrenci> {
     @Override
     public Optional<Ogrenci> findById(Long id) {
         return Optional.ofNullable(entityManager.find(Ogrenci.class,id));
+    }
+
+    @Override
+    public List<Ogrenci> findByColumnNameAndValue(String columnName, String value) {
+        return null;
     }
 
 
